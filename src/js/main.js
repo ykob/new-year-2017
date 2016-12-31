@@ -12,6 +12,7 @@ class Chicken {
       }
     };
     this.mesh = null;
+    this.instances = 1000;
   }
   load(callback) {
     this.loader.load('/obj/big_chicken.obj', (obj) => {
@@ -20,8 +21,7 @@ class Chicken {
     })
   }
   createGeometry(obj) {
-    const bGeometry = new THREE.BufferGeometry();
-    const iGeometry = new THREE.InstancedBufferGeometry();
+    const geometry = new THREE.InstancedBufferGeometry();
     const verticesBase = [];
     const normalsBase = [];
     const uvsBase = [];
@@ -33,17 +33,24 @@ class Chicken {
     const vertices = new Float32Array(verticesBase);
     const normals = new Float32Array(normalsBase);
     const uvs = new Int16Array(uvsBase);
-    bGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-    bGeometry.addAttribute('normal', new THREE.BufferAttribute(normals, 3));
-    bGeometry.addAttribute('uv', new THREE.BufferAttribute(uvs, 2));
-    return bGeometry;
+    geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    geometry.addAttribute('normal', new THREE.BufferAttribute(normals, 3));
+    geometry.addAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+    const offsets = new THREE.InstancedBufferAttribute(new Float32Array(this.instances * 3), 3, 1);
+    const rotates = new THREE.InstancedBufferAttribute(new Float32Array(this.instances * 3), 3, 1);
+    for ( var i = 0, ul = offsets.count; i < ul; i++ ) {
+      offsets.setXYZ(i, Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5);
+      rotates.setXYZ(i, Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5);
+    }
+    geometry.addAttribute('offset', offsets);
+    geometry.addAttribute('rotate', rotates);
+    return geometry;
   }
   createMesh(geometry) {
     return new THREE.Mesh(geometry, new THREE.RawShaderMaterial({
       uniforms: this.uniforms,
       vertexShader: glslify('../glsl/chicken.vs'),
       fragmentShader: glslify('../glsl/chicken.fs'),
-      side: THREE.DoubleSide
     }));
   }
   render(time) {
@@ -60,7 +67,7 @@ const renderBack = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHe
 const scene = new THREE.Scene();
 const sceneBack = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-const cameraBack = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+const cameraBack = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
 const clock = new THREE.Clock();
 
 const postEffect = new PostEffect(renderBack.texture);
@@ -93,7 +100,7 @@ const renderLoop = () => {
 const init = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0xeeeeee, 1.0);
-  cameraBack.position.set(0, 0, 5000);
+  cameraBack.position.set(0, 0, 20000);
   cameraBack.lookAt(new THREE.Vector3());
 
   scene.add(postEffect.mesh);
