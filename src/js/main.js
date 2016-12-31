@@ -67,7 +67,7 @@ const renderBack = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHe
 const scene = new THREE.Scene();
 const sceneBack = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-const cameraBack = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
+const cameraBack = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100000);
 const clock = new THREE.Clock();
 
 const postEffect = new PostEffect(renderBack.texture);
