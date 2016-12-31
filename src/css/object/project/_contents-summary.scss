@@ -3,23 +3,26 @@
   bottom: 4%; left: 2%;
   z-index: 100;
   &__head {
+    line-height: 1;
     margin: 0;
-    @include flexFontSize(4);
+    @include flexFontSize(6);
     font-weight: 400;
-    letter-spacing: 2px;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
   }
   &__text {
-    max-width: 360px;
     line-height: 1.75;
     margin: 1em 0;
-    @include flexFontSize(1);
+    @include flexFontSize(1.2);
     letter-spacing: 1px;
   }
   &__link-source {
+    display: flex;
     margin: 0;
     @include flexFontSize(1);
     letter-spacing: 1px;
     a {
+      display: block;
       position: relative;
       &:after {
         content: '';
@@ -27,9 +30,13 @@
         position: absolute;
         z-index: -1;
         top: 0; right: 0; bottom: 0; left: 0;
-        background-color: $color-text;
+        background-color: rgba(255, 0, 0, 0.5);
       }
     }
+  }
+  &__link-separate {
+    display: block;
+    margin: 0 1em;
   }
   //
   // Init Interaction

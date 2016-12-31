@@ -1,11 +1,11 @@
 -
-  var repositoryName = 'demofiles';
+  var repositoryName = 'new-year-2017';
   var websiteDomain = 'https://ykob.github.io/' + repositoryName;
-  var themeColor = '#ffffff';
+  var themeColor = '#cc2200';
 
-  var metaTitle = 'Happy New Year 2017';
+  var metaTitle = 'HAPPY NEW YEAR 2017';
   var metaKeywords = 'WebGL, three.js';
-  var metaDescription = '';
+  var metaDescription = '2016年はたいへんお世話になりました。2017年もよろしくおねがいします。';
   var metaOgpImg = 'share.jpg';
 
 doctype html
@@ -38,9 +38,19 @@ html(lang="ja")
 
   body
     .p-contents-summary
+      h1.p-contents-summary__head
+        |Happy New Year 2017
+      p.p-contents-summary__text
+        |2016年にはglsl, vue.js, svgなど、さまざま学習することができました。
+        br
+        |2017年には今度こそ流体シミュレーションを書けるようになりたいです。
       p.p-contents-summary__link-source
         a(href="https://github.com/ykob/"+repositoryName)
-          |view source.
+          |view source
+        span.p-contents-summary__link-separate
+          |/
+        a(href="https://3docean.net/item/low-poly-set-duck-chicken-poult/10445104")
+          |3D Model
     canvas(id="canvas-webgl", class="p-canvas-webgl")
     script(src="./js/vendor.js")
     script(src="./js/main.js")
