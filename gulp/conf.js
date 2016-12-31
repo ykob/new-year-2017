@@ -120,6 +120,7 @@ module.exports.uglify = {
 module.exports.copy = {
   dest: {
     src: [
+      `${DIR.SRC}/img/**/*.*`,
       `${DIR.SRC}/font/**/*.*`,
       `${DIR.SRC}/obj/**/*.*`,
     ],
