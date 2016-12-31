@@ -12,13 +12,12 @@ varying vec3 vNormal;
 
 #pragma glslify: translateMatrix = require(glsl-matrix/translateMatrix);
 #pragma glslify: rotateMatrix = require(glsl-matrix/rotateMatrix);
-#pragma glslify: scaleMatrix = require(glsl-matrix/scaleMatrix);
 
 void main(void) {
   float radian = radians(time);
   vec4 updatePosition =
     rotateMatrix(radian * 5.0 + rotate.x, radian * 20.0 + rotate.y, radian + rotate.z)
-    * translateMatrix(offset * 40000.0 + offset * sin(radian + rotate.x * 10.0) * 20000.0)
+    * translateMatrix(offset * 60000.0 + offset * sin(radian + rotate.x * 10.0) * 40000.0)
     * rotateMatrix(radian * rotate.x * 100.0, radian * rotate.y * 100.0, radian * rotate.z * 100.0)
     * vec4(position, 1.0);
   vNormal = normal;
