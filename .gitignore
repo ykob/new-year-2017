@@ -1,10 +1,6 @@
 .DS_Store
 node_modules
 ignore
-src/obj/**/*
-dst/css/**/*
-dst/js/**/*
-dst/**/*.json
-dst/**/*.html
+dst/**/*
 build/**/*
 .sass-cache
