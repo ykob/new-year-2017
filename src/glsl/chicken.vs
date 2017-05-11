@@ -10,8 +10,8 @@ uniform float time;
 
 varying vec3 vNormal;
 
-#pragma glslify: translateMatrix = require(glsl-matrix/translateMatrix);
-#pragma glslify: rotateMatrix = require(glsl-matrix/rotateMatrix);
+#pragma glslify: translateMatrix = require(glsl-matrix/computeTranslateMat);
+#pragma glslify: rotateMatrix = require(glsl-matrix/computeRotateMat);
 
 void main(void) {
   float radian = radians(time);
